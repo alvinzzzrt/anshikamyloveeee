@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MY CUTIE !!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&family=Varela+Round&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --soft-green: #f2f9f2;
+            --warm-pink: #ffdae0;
+            --accent-brown: #8d775f;
+            --white-glass: rgba(255, 255, 255, 0.8);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(to bottom, #e0f2fe, #f2f9f2);
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: var(--accent-brown);
+            overflow-x: hidden;
+        }
+
+        /* --- Falling Hearts/Petals Animation --- */
+        .heart {
+            position: fixed;
+            top: -10px;
+            font-size: 20px;
+            color: #ffb7c5;
+            user-select: none;
+            z-index: 1000;
+            pointer-events: none;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(105vh) translateX(20px) rotate(360deg);
+            }
+        }
+
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            z-index: 10;
+        }
+
+        h1 {
+            font-family: 'Varela Round', sans-serif;
+            font-size: 3.5rem;
+            margin: 0;
+            color: #7ca57c;
+            text-shadow: 2px 2px white;
+        }
+
+        /* Photo Gallery Layout */
+        .photo-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            padding: 20px;
+            max-width: 1100px;
+            z-index: 10;
+        }
+
+        .photo-card {
+            background: white;
+            padding: 12px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .photo-card:hover {
+            transform: scale(1.05) rotate(-2deg);
+        }
+
+        .photo-card img {
+            width: 280px;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+
+        .photo-card p {
+            text-align: center;
+            font-weight: 600;
+            margin-top: 10px;
+            color: #b56576;
+        }
+
+        .button-section {
+            margin: 40px 0;
+            text-align: center;
+            z-index: 10;
+        }
+
+        .cute-btn {
+            background: var(--warm-pink);
+            border: none;
+            padding: 18px 35px;
+            margin: 10px;
+            border-radius: 30px;
+            font-family: 'Quicksand', sans-serif;
+            font-weight: 600;
+            color: #b56576;
+            cursor: pointer;
+            box-shadow: 0 5px 0 #efb1bd;
+            transition: 0.2s;
+        }
+
+        .cute-btn:active {
+            box-shadow: 0 0 0;
+            transform: translateY(5px);
+        }
+
+        #message-display {
+            margin: 20px auto;
+            padding: 25px;
+            background: var(--white-glass);
+            border-radius: 20px;
+            width: 85%;
+            max-width: 550px;
+            text-align: center;
+            backdrop-filter: blur(8px);
+            border: 2px solid #ffffff;
+            font-size: 1.2rem;
+            line-height: 1.5;
+            min-height: 60px;
+        }
+
+        footer {
+            margin-bottom: 40px;
+            opacity: 0.6;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>MY CUTIE !!</h1>
+        <p>A secret garden just for you 🌿</p>
+    </header>
+
+    <div class="photo-container">
+        <div class="photo-card">
+            <img src="pic1.jpg" alt="Photo 1">
+            <p>OH MY GORGEOUS WOMAN!!!</p>
+        </div>
+        <div class="photo-card">
+            <img src="pic2.jpg" alt="Photo 2">
+            <p>My favorite smile ✨</p>
+        </div>
+        <div class="photo-card">
+            <img src="pic3.jpg" alt="Photo 3">
+            <p>Absolutely stunning 🌸</p>
+        </div>
+    </div>
+
+    <div class="button-section">
+        <button class="cute-btn" onclick="showMessage('You are the best thing that ever happened to me. 🌸')">A Little Secret</button>
+        <button class="cute-btn" onclick="showMessage('I promise to always keep you laughing! 🥯')">My Promise</button>
+        <button class="cute-btn" onclick="showMessage('You deserve all the flowers in the world. 💐')">Just For You</button>
+        
+        <div id="message-display">Click a button to see a message!</div>
+    </div>
+
+    <footer>Made with love 🌸</footer>
+
+    <script>
+        function showMessage(text) {
+            const display = document.getElementById('message-display');
+            display.style.opacity = 0;
+            setTimeout(() => {
+                display.innerHTML = "✨ " + text + " ✨";
+                display.style.opacity = 1;
+            }, 200);
+            display.style.transition = "opacity 0.5s";
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            const icons = ['🌸', '❤️', '✨', '🎀'];
+            heart.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+            
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 3 + 's';
+            heart.style.opacity = Math.random();
+            heart.style.fontSize = (Math.random() * 10 + 15) + 'px';
+            
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+        }
+
+        setInterval(createHeart, 400);
+    </script>
+
+</body>
+</html>
