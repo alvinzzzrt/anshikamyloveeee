@@ -3,118 +3,313 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A SECRET GARDEN 🌿</title>
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600&family=Varela+Round&display=swap" rel="stylesheet">
+    <title>FOR THE LOVE OF MY LIFE!!! 🎀</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Varela+Round&display=swap" rel="stylesheet">
     <style>
         :root {
-            --soft-green: #e8f3e8;
-            --warm-pink: #ffdae0;
-            --accent-brown: #8d775f;
-            --main-bg: #fdfaf4;
+            --ghibli-green: #a8d5ba;
+            --soft-pink: #ffdae0;
+            --deep-rose: #b56576;
+            --grid-gap: 8px;
+            --cinema-black: #111;
+            --projector-white: #fdfdfd;
         }
 
         body {
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0;
             font-family: 'Quicksand', sans-serif;
-            background-color: var(--main-bg);
-            color: var(--accent-brown);
+            background: #e0f2fe url('https://images.unsplash.com/photo-1502082553048-f009c37129b9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh; width: 100vw;
             overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            display: flex; justify-content: center; align-items: center;
         }
 
-        .entry-container {
-            position: relative;
+        /* --- SUBTLE BACKGROUND EMOJIS (z-index 5, behind card) --- */
+        .floater { 
+            position: fixed; pointer-events: none; z-index: 5; 
+            animation: driftUp 8s linear forwards; opacity: 0.3 !important; 
+        }
+        @keyframes driftUp { 
+            0% { transform: translateY(110vh) scale(0.6) rotate(0deg); opacity: 0; } 
+            20% { opacity: 0.3; }
+            80% { opacity: 0.3; }
+            100% { transform: translateY(-20vh) scale(1) rotate(180deg); opacity: 0; } 
+        }
+
+        /* --- CUTESY PAGE TRANSITIONS --- */
+        .page {
+            position: absolute; width: 95%; max-width: 550px; 
+            display: none; flex-direction: column; align-items: center; z-index: 20; 
+        }
+        .active { 
+            display: flex; 
+            animation: cutesyPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+        }
+        @keyframes cutesyPop {
+            0% { opacity: 0; transform: scale(0.5) translateY(50px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px 25px; border-radius: 40px; border: 4px solid white; 
+            backdrop-filter: blur(8px); width: 100%; box-shadow: 0 15px 50px rgba(0,0,0,0.1);
             text-align: center;
-            padding: 50px;
-            max-width: 600px;
-            z-index: 10;
         }
 
-        h1 {
-            font-family: 'Varela Round', sans-serif;
-            font-size: 4.5rem;
-            line-height: 1.1;
-            margin-bottom: 30px;
-            color: #6b8e6b;
-            text-shadow: 2px 2px white;
+        /* PAGE 3 POLAROIDS */
+        .collage-container {
+            position: relative; height: 320px; width: 100%;
+            margin-bottom: 5px; display: flex; justify-content: center;
+        }
+        .polaroid {
+            position: absolute; background: white; padding: 10px 10px 35px 10px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15); border: 1px solid #eee;
+            width: 160px; transition: 0.3s ease; cursor: zoom-in;
+        }
+        .polaroid img { width: 100%; height: 140px; object-fit: cover; border-radius: 4px; }
+        .p1 { left: 5%; top: 10px; transform: rotate(-8deg); z-index: 3; }
+        .p2 { left: 50%; top: 35px; transform: translateX(-50%) rotate(2deg); z-index: 2; }
+        .p3 { right: 5%; top: 15px; transform: rotate(10deg); z-index: 1; }
+
+        /* PAGE 4 GRID */
+        .grid-container {
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--grid-gap);
+            width: 100%; margin: 10px 0; padding: 5px;
+        }
+        .grid-box {
+            background: white; padding: 6px; box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            border: 2px solid var(--soft-pink); border-radius: 12px; transition: 0.3s ease; cursor: zoom-in;
+        }
+        .grid-box img { width: 100%; height: 100px; object-fit: cover; border-radius: 8px; }
+
+        /* PAGE 5 CINEMA THEME */
+        .cinema-container { margin: 15px 0; display: flex; justify-content: center; }
+        .cinema-frame {
+            background: var(--cinema-black); padding: 45px 12px; border-radius: 4px;
+            position: relative; box-shadow: 0 0 30px rgba(0,0,0,0.5); width: 280px;
+            transition: 0.4s ease; cursor: zoom-in; overflow: hidden;
+        }
+        .cinema-frame::before, .cinema-frame::after {
+            content: ""; position: absolute; left: 0; width: 100%; height: 15px;
+            background-image: linear-gradient(to right, white 35%, transparent 35%);
+            background-size: 45px 100%; background-repeat: repeat-x; opacity: 0.9;
+        }
+        .cinema-frame::before { top: 15px; }
+        .cinema-frame::after { bottom: 15px; }
+        .rec-dot {
+            position: absolute; top: 35px; right: 20px; color: #ff4d4d;
+            font-size: 0.6rem; font-weight: 800; animation: blink 1s infinite; z-index: 10;
+        }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+        .cinema-frame img { width: 100%; height: 180px; object-fit: cover; border: 1px solid #222; }
+
+        /* PAGE 6: VINTAGE PROJECTOR VIBE */
+        .projector-container {
+            margin: 15px 0; display: flex; justify-content: center; position: relative;
+        }
+        
+        /* The Projector 'Slide' Frame */
+        .projector-slide {
+            background: var(--projector-white);
+            padding: 15px 15px 40px 15px; /* bottom padding for text/zoom msg */
+            border-radius: 5px;
+            position: relative;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+            width: 320px;
+            transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: zoom-in;
+            border: 4px solid #eaeae0; /* Faded plastic look */
+            overflow: hidden;
+            display: flex; gap: 10px; justify-content: center;
         }
 
-        .cute-btn {
-            background: var(--warm-pink);
-            border: none;
-            padding: 20px 45px;
-            border-radius: 50px;
-            font-family: 'Quicksand', sans-serif;
-            font-weight: 600;
-            font-size: 1.5rem;
-            color: #b56576;
-            cursor: pointer;
-            box-shadow: 0 6px 0 #efb1bd;
-            transition: all 0.2s ease-in-out;
-            display: inline-block;
-        }
-
-        .cute-btn:active {
-            box-shadow: 0 0 0;
-            transform: translateY(6px);
-        }
-
-        /* Decoration */
-        .decoration {
-            position: fixed;
-            font-size: 6rem;
-            pointer-events: none;
+        /* The Animated PROJECTOR BEAM ( emanates from the frame) */
+        .projector-slide::before {
+            content: "";
+            position: absolute;
+            top: -150px; left: 50%;
+            transform: translateX(-50%);
+            width: 300px; height: 200px;
+            background: radial-gradient(ellipse at bottom, rgba(255, 255, 255, 0.6) 0%, transparent 70%);
+            opacity: 0.5;
             z-index: 1;
-            opacity: 0.8;
+            pointer-events: none;
+            filter: blur(5px);
+            animation: beamFlicker 3s infinite;
         }
-        .top-left { top: -20px; left: -20px; }
-        .top-right { top: -20px; right: -20px; }
-        .bottom-left { bottom: -20px; left: -20px; }
-        .bottom-right { bottom: -20px; right: -20px; }
+        @keyframes beamFlicker { 0%, 100% { opacity: 0.4; } 50% { opacity: 0.6; } }
 
-        .kitty-row {
-            margin-top: 40px;
-            font-size: 2rem;
+        /* Projector Photos: Gritty, faded, sepia */
+        .projector-slide img {
+            width: 46%; /* 2 pics side by side */
+            height: 150px;
+            object-fit: cover;
+            border: 2px solid #333;
+            filter: grayscale(0.2) sepia(0.3) contrast(1.1); /* faded projector look */
+            position: relative; z-index: 5;
+        }
+        
+        /* Subtle Film Grain texture overlay for Page 6 */
+        .projector-slide::after {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('grain.png'); /* Add a transparent grain image or remove this */
+            opacity: 0.1;
+            z-index: 4;
+            pointer-events: none;
+        }
+
+        /* --- UI ELEMENTS (Zoom/Next Buttons) --- */
+        .zoomed {
+            position: fixed !important; top: 50% !important; left: 50% !important;
+            transform: translate(-50%, -50%) scale(2) rotate(0deg) !important;
+            z-index: 100000 !important;
+            width: 280px !important; /* for Page 5, adapts dynamically on Page 6 */
+        }
+        /* Overriding zoom behavior for Page 6 specifically */
+        #page6 .zoomed { width: 320px !important; transform: translate(-50%, -50%) scale(1.6) rotate(0deg) !important; }
+
+        .zoom-cloud {
+            background: #fff; color: var(--deep-rose); padding: 4px 14px; border-radius: 20px;
+            font-size: 0.7rem; font-weight: 800; display: inline-block; margin: 5px 0 10px 0;
+            border: 2px solid var(--soft-pink);
+        }
+
+        .nav-btn {
+            background: white; border: 2.5px solid var(--ghibli-green);
+            padding: 8px 30px; border-radius: 50px; font-weight: 800;
+            color: var(--deep-rose); cursor: pointer; box-shadow: 0 4px 0 var(--soft-pink);
+            transition: 0.2s; font-size: 0.85rem;
+        }
+        .nav-btn:active { transform: scale(0.95); }
+
+        h1 { font-family: 'Varela Round', sans-serif; font-size: 1.6rem; color: var(--deep-rose); margin: 0 0 10px 0; }
+        .msg-box {
+            background: white; border-radius: 15px; padding: 12px;
+            font-size: 0.85rem; font-weight: 600; color: #4a6741;
+            border: 2px dashed var(--ghibli-green); line-height: 1.4;
         }
     </style>
 </head>
 <body>
 
-    <div class="decoration top-left">🌿🌸</div>
-    <div class="decoration top-right">🌸🌿</div>
-    <div class="decoration bottom-left">🌿🌸</div>
-    <div class="decoration bottom-right">🌸🌿</div>
+    <audio id="bgMusic" loop>
+        <source src="music.mp3" type="audio/mpeg">
+    </audio>
 
-    <div class="entry-container">
-        <h1>HELLO MY LOVE!!!!!</h1>
+    <div id="page1" class="page active">
+        <div class="glass-card"><h1>HI BABY! ❤️</h1><p style="font-weight:700;">Surprise inside...</p><button class="nav-btn" onclick="startExperience()">LETS GO! ✨</button></div>
+    </div>
 
-        <button class="cute-btn" onclick="checkPassword()">
-            LETS GO! 🐾
-        </button>
+    <div id="page2" class="page">
+        <div class="glass-card"><h1>A little note... ✍️</h1><div class="msg-box">You are the most precious person in my world!</div><div style="margin-top:15px;"><button class="nav-btn" onclick="prevPage()">Back</button><button class="nav-btn" onclick="nextPage()">Next ✨</button></div></div>
+    </div>
 
-        <div class="kitty-row">
-            🐱 🐈 🐈‍⬛ 😽 🐾 🎀
+    <div id="page3" class="page">
+        <div class="glass-card">
+            <h1>MEMORIES! 🛵</h1>
+            <div class="collage-container">
+                <div class="polaroid p1" onclick="this.classList.toggle('zoomed')"><img src="us1.jpg"></div>
+                <div class="polaroid p2" onclick="this.classList.toggle('zoomed')"><img src="us2.jpg"></div>
+                <div class="polaroid p3" onclick="this.classList.toggle('zoomed')"><img src="us3.jpg"></div>
+            </div>
+            <div class="zoom-cloud">☁️ click a pic to zoom!</div>
+            <div class="msg-box">OMG THE TIMES WE USED TO ROAM AROUND... 🛵</div>
+            <div style="margin-top: 15px; display: flex; gap: 10px; justify-content: center;"><button class="nav-btn" onclick="prevPage()">Back</button><button class="nav-btn" onclick="nextPage()">Next ✨</button></div>
+        </div>
+    </div>
+
+    <div id="page4" class="page">
+        <div class="glass-card">
+            <h1>26TH OCTOBER 2025 🌸</h1>
+            <div class="grid-container">
+                <div class="grid-box" onclick="this.classList.toggle('zoomed')"><img src="oct1.jpg"></div>
+                <div class="grid-box" onclick="this.classList.toggle('zoomed')"><img src="oct2.jpg"></div>
+                <div class="grid-box" onclick="this.classList.toggle('zoomed')"><img src="oct3.jpg"></div>
+                <div class="grid-box" onclick="this.classList.toggle('zoomed')"><img src="oct4.jpg"></div>
+            </div>
+            <div class="zoom-cloud">☁️ click a pic to zoom!</div>
+            <div class="msg-box">This day is forever burned in my heart. I love you!</div>
+            <div style="margin-top: 15px; display: flex; gap: 10px; justify-content: center;"><button class="nav-btn" onclick="prevPage()">Back</button><button class="nav-btn" onclick="nextPage()">Next ✨</button></div>
+        </div>
+    </div>
+
+    <div id="page5" class="page">
+        <div class="glass-card">
+            <h1>CHILDRENS DAY!!! 🧸</h1>
+            <div class="cinema-container">
+                <div class="cinema-frame" onclick="this.classList.toggle('zoomed')">
+                    <div class="rec-dot">● REC</div>
+                    <img src="children.jpg">
+                </div>
+            </div>
+            <div class="zoom-cloud">☁️ click to zoom the reel!</div>
+            <div class="msg-box">
+                To my favorite "kid" at heart! Happy Children's Day baby. 🍭✨
+            </div>
+            <div style="margin-top: 15px; display: flex; gap: 10px; justify-content: center;">
+                <button class="nav-btn" onclick="prevPage()">Back</button>
+                <button class="nav-btn" onclick="nextPage()">Next ✨</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="page6" class="page">
+        <div class="glass-card">
+            <h1>GRADUATION!! 🎓🎀</h1>
+            
+            <div class="projector-container">
+                <div class="projector-slide" onclick="this.classList.toggle('zoomed')">
+                    <img src="grad1.jpg" alt="Grad Photo 1">
+                    <img src="grad2.jpg" alt="Grad Photo 2">
+                </div>
+            </div>
+
+            <div class="zoom-cloud">☁️ click to zoom the projector slide!</div>
+
+            <div class="msg-box">
+                You did it, baby! I am SO incredibly proud of you and everything you've achieved. Seeing you up there was the best feeling ever... Mwahhh! 💖🎉
+            </div>
+
+            <div style="margin-top: 15px; display: flex; gap: 10px; justify-content: center;">
+                <button class="nav-btn" onclick="prevPage()">Back</button>
+                <button class="nav-btn" onclick="location.reload()">Start Over 🐾</button>
+            </div>
         </div>
     </div>
 
     <script>
-        function checkPassword() {
-            // YOU CAN CHANGE THE PASSWORD HERE! 
-            // Right now it is: love
-            var password = prompt("Enter the secret code to enter the garden! 🌸", "");
+        let current = 1;
+        const totalPages = 6; // Updated logic for 6 pages
 
-            if (password === "love") {
-                alert("Correct! Welcome home, Cutie !! ✨");
-                window.location.href = "photos.html"; 
-            } else {
-                alert("Oops! Only my favorite person knows the code... Try again! 🐱");
-            }
+        function startExperience() {
+            const music = document.getElementById('bgMusic');
+            music.play().catch(e => console.log("Audio play blocked"));
+            nextPage();
         }
-    </script>
+        function switchPage(step) {
+            document.getElementById(`page${current}`).classList.remove('active');
+            current += step;
+            document.getElementById(`page${current}`).classList.add('active');
+        }
+        function nextPage() { if(current < totalPages) switchPage(1); }
+        function prevPage() { if(current > 1) switchPage(-1); }
 
+        function spawn() {
+            const icons = ['💖', '🌸', '✨', '🎀', '⭐', '🦋', '🎈', '🎓']; // Added balloon/hat
+            const f = document.createElement('div');
+            f.className = 'floater';
+            f.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+            f.style.left = Math.random() * 95 + 'vw';
+            f.style.fontSize = (Math.random() * 10 + 15) + 'px';
+            f.style.top = '110vh';
+            document.body.appendChild(f);
+            setTimeout(() => f.remove(), 8000);
+        }
+        setInterval(spawn, 500);
+    </script>
 </body>
 </html>
