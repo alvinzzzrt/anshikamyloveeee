@@ -2,480 +2,691 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>AL AND AN ACC SORTER 🐾</title>
-    <style id="theme-style">
-        @import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&display=swap');
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FOR THE LOVE OF MY LIFE!!! 🎀</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Caveat:wght@700&display=swap" rel="stylesheet">
+    <style>
         :root {
-            --bg-overlay: linear-gradient(rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.15));
-            --bg-img: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2070&auto=format&fit=crop');
-            --text-main: #5d6d5e;
-            --accent: #a5b8a5;
-            --accent-hover: #8ca68c;
-            --card-bg: rgba(255, 255, 255, 0.78);
-            --input-bg: rgba(255, 255, 255, 0.5);
-            --shadow: rgba(0, 0, 0, 0.08);
-            --border: rgba(255, 255, 255, 0.9);
+            --ghibli-green: #a8d5ba;
+            --soft-pink: #ffdae0;
+            --deep-rose: #b56576;
+            --glass-bg: rgba(255, 255, 255, 0.9);
+            --neon-pink: #ff007f;
+            --neon-blue: #00f2ff;
+            --mochi-peach: #ffeadb;
+            --gold: #ffd700;
+            --velvet-red: #800020;
+            --curtain-shadow: #3d000f;
+            --wood: #5d4037;
         }
 
         body {
-            font-family: 'Kosugi Maru', sans-serif;
-            margin: 0; padding: 15px; min-height: 100vh;
-            text-align: center;
-            background: var(--bg-overlay), var(--bg-img);
-            background-size: cover; background-position: center; background-attachment: fixed;
-            color: var(--text-main); transition: background 1s ease, color 0.5s;
+            margin: 0; padding: 0;
+            font-family: 'Quicksand', sans-serif;
+            height: 100vh; width: 100vw;
+            overflow: hidden;
+            display: flex; justify-content: center; align-items: center;
+            background: linear-gradient(rgba(255,255,255,0.1), rgba(255,255,255,0.1)), 
+                        url('https://images.unsplash.com/photo-1522383225653-ed111181a951?q=80&w=2000');
+            background-size: cover; background-position: center;
         }
 
-        h1 { 
-            color: #ffffff; margin: 5px 0 15px 0; 
-            text-transform: uppercase; text-shadow: 0 4px 12px rgba(0,0,0,0.25);
-            font-size: 1.8rem; letter-spacing: 4px; font-weight: 900;
+        /* --- ANIMATIONS --- */
+        /* Updated fadeOut for smoother translucency at the end */
+        @keyframes fadeOut { 
+            0% { opacity: 0.8; transform: scale(1) translateY(0); } 
+            100% { opacity: 0; transform: scale(0.4) translateY(-30px); } 
         }
-
-        .nav { margin-bottom: 20px; }
+        @keyframes fall { 0% { transform: translateY(-10vh) rotate(0deg); } 100% { transform: translateY(105vh) rotate(720deg); } }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+        @keyframes softPop { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        @keyframes cardFloat { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+        @keyframes flicker { 0%, 100% { opacity: 1; } 50% { opacity: 0.8; } 80% { opacity: 0.9; } }
+        @keyframes jitter { 0% { transform: rotate(15deg) scale(1); } 50% { transform: rotate(18deg) scale(1.05); } 100% { transform: rotate(15deg) scale(1); } }
+        @keyframes bounce-slow { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
         
-        button {
-            padding: 9px 22px; margin: 4px; 
-            border-radius: 30px; border: 3px solid #fff;
-            background: var(--accent); color: white; 
-            font-weight: bold; cursor: pointer;
-            transition: 0.3s; box-shadow: 0 4px 15px var(--shadow); 
-            text-transform: uppercase; font-size: 10px; letter-spacing: 0.5px;
+        @keyframes pendulum {
+            0% { transform: rotate(-1.5deg); }
+            50% { transform: rotate(1.5deg); }
+            100% { transform: rotate(-1.5deg); }
         }
-        button:hover { background: var(--accent-hover); transform: scale(1.04); }
 
-        .btn-grey { background: #8e8e8e; }
-        #cutie-btn { background: #e8a5a5; }
-
-        .card {
-            background: var(--card-bg); 
-            backdrop-filter: blur(14px); 
-            width: 92%; max-width: 750px; 
-            margin: 0 auto 15px; padding: 25px 35px; 
-            border-radius: 45px; 
-            box-shadow: 0 20px 50px var(--shadow);
-            display: none; border: 1px solid var(--border);
+        @keyframes cameraFlash {
+            0% { background: transparent; opacity: 0; }
+            10% { background: white; opacity: 1; }
+            40% { background: white; opacity: 1; }
+            100% { background: transparent; opacity: 0; }
         }
-        .active { display: block; animation: floatUp 0.5s ease-out; }
 
-        @keyframes floatUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-        textarea {
-            width: 100%; height: 120px; margin-bottom: 15px; border-radius: 25px;
-            border: none; padding: 20px; box-sizing: border-box; 
-            font-family: 'Consolas', monospace; font-size: 12px;
-            background: var(--input-bg); outline: none; color: inherit;
+        @keyframes cameraPop {
+            0% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+            20% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+            80% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
         }
+
+        @keyframes curtainOpen { 0% { transform: scaleX(1); } 100% { transform: scaleX(0); } }
+        @keyframes curtainClose { 0% { transform: scaleX(0); } 100% { transform: scaleX(1); } }
+
+        @keyframes thinkFloat {
+            0% { transform: scale(0) translate(0, 0); opacity: 0; }
+            20% { opacity: 1; transform: scale(1.2) translate(0, 0); }
+            100% { transform: scale(1) translate(var(--tx), var(--ty)); opacity: 0; }
+        }
+
+        @keyframes gradPop {
+            0% { transform: translate(-50%, -50%) scale(0) rotate(0deg); opacity: 0; }
+            20% { opacity: 1; transform: translate(var(--tx), var(--ty)) scale(1.2) rotate(var(--rot)); }
+            80% { opacity: 1; transform: translate(var(--tx), var(--ty)) scale(1) rotate(var(--rot)); }
+            100% { opacity: 0; transform: translate(var(--tx), calc(var(--ty) + 50px)) scale(0.8) rotate(var(--rot)); }
+        }
+
+        @keyframes revealPage {
+            0% { opacity: 0; transform: translateY(20px); filter: blur(10px); }
+            100% { opacity: 1; transform: translateY(0); filter: blur(0); }
+        }
+
+        /* --- DECORATIONS --- */
+        .trail { 
+            position: fixed; 
+            pointer-events: none; 
+            color: #ffb7c5; 
+            font-size: 1.4rem; 
+            z-index: 100000; 
+            animation: fadeOut 1s ease-out forwards; 
+            text-shadow: 0 0 5px rgba(255, 183, 197, 0.5);
+        }
+        .petal { position: fixed; background: #ffdae0; border-radius: 150% 0 150% 0; opacity: 0.7; pointer-events: none; z-index: 15; animation: fall linear forwards; }
+        .cloud { position: fixed; background: white; padding: 10px 18px; border-radius: 50px; box-shadow: 0 8px 20px rgba(0,0,0,0.05); color: var(--deep-rose); font-weight: 700; z-index: 5; animation: float 4s ease-in-out infinite; font-size: 0.85rem; border: 1px solid #eee; min-width: 120px; text-align: center; }
+        .cloud-left { left: 5%; top: 12%; }
+        .cloud-right { right: 5%; bottom: 12%; animation-delay: 2s; }
         
-        .row { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin: 12px 0; align-items: center; }
+        .thinking-emoji, .grad-pop-emoji {
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+        }
+
+        .thinking-emoji {
+            font-size: 2rem;
+            animation: thinkFloat 1.5s ease-out forwards;
+        }
+
+        .grad-pop-emoji {
+            font-size: 2.2rem;
+            animation: gradPop 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            left: 50%;
+            top: 45%;
+        }
+
+        /* --- LAYOUT --- */
+        .page { position: absolute; width: 90%; max-width: 440px; display: none; flex-direction: column; align-items: center; z-index: 20; }
+        .ultra-compact { max-width: 340px !important; } 
+        .active { display: flex; animation: softPop 0.5s ease; }
+
+        .glass-card { background: var(--glass-bg); backdrop-filter: blur(15px); padding: 25px; border-radius: 40px; border: 3px solid rgba(255,255,255,0.7); width: 100%; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.08); box-sizing: border-box; animation: cardFloat 6s ease-in-out infinite; position: relative; overflow: hidden; }
+
+        /* Camera Flash Overlay */
+        #flash { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 200000; pointer-events: none; opacity: 0; }
+        .shutter-active { animation: cameraFlash 1s ease-in-out forwards; }
         
-        input, select { 
-            padding: 10px 15px; border-radius: 15px; 
-            border: 1px solid var(--border);
-            outline: none; font-size: 12px; background: white; color: inherit;
+        #camera-icon { 
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+            font-size: 80px; z-index: 200001; pointer-events: none; opacity: 0;
+        }
+        .camera-pop-active { animation: cameraPop 1s ease-in-out forwards; }
+
+        /* --- COMPONENTS --- */
+        .msg-box { 
+            background: rgba(255,255,255,0.6); 
+            border: 2px solid var(--ghibli-green); 
+            border-radius: 18px; 
+            padding: 8px 12px; 
+            color: #5d4037; 
+            margin: 5px auto; 
+            font-weight: 700; 
+            font-size: 0.85rem; 
+            max-width: 90%;
+            line-height: 1.3;
+            box-shadow: 2px 2px 0px var(--ghibli-green);
         }
 
-        .dropdown {
-            min-height: 45px; max-height: 150px; overflow-y: auto; 
-            padding: 15px; text-align: left; 
-            background: var(--input-bg); 
-            margin: 10px 0; border-radius: 20px; 
-            font-family: monospace; font-size: 11px; color: inherit;
-            border: 1px solid rgba(0,0,0,0.05);
+        .zoom-hint {
+            font-size: 0.6rem;
+            color: #888;
+            margin-top: 4px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .label-text { font-size: 10px; font-weight: 900; color: var(--accent); display: block; margin-top: 20px; text-align: left; text-transform: uppercase; }
+        .btn-row { display: flex; gap: 12px; margin-top: 15px; justify-content: center; }
+        .nav-btn { background: white; border: 2px solid var(--ghibli-green); padding: 10px 25px; border-radius: 50px; font-weight: 700; color: var(--deep-rose); cursor: pointer; transition: 0.2s; box-shadow: 0 3px 0 var(--soft-pink); font-size: 0.9rem; }
+        .nav-btn:active { transform: translateY(2px); box-shadow: none; }
+        .back-btn { background: #fafafa; border-color: #ddd; color: #888; box-shadow: 0 3px 0 #eee; }
+
+        /* --- VISUAL EFFECTS --- */
+        .roll-compact-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin: 8px auto; width: 100%; }
+        .mini-box { width: 100%; aspect-ratio: 1/1; border: 3px solid white; border-bottom: 8px solid white; border-radius: 2px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); object-fit: cover; cursor: zoom-in; transition: 0.2s; }
+        .mini-box:hover { transform: scale(1.02); }
+
+        .film-roll-landscape { 
+            background: #111; 
+            padding: 15px 10px; 
+            border-radius: 4px; 
+            position: relative; 
+            cursor: zoom-in; 
+            display: inline-block; 
+            box-shadow: 0 8px 20px rgba(0,0,0,0.4); 
+            width: 90%;
+            margin: 15px 0;
+        }
+        .film-roll-landscape::before, .film-roll-landscape::after { 
+            content: ''; 
+            position: absolute; 
+            left: 5px; 
+            right: 5px; 
+            height: 6px; 
+            background-image: repeating-linear-gradient(90deg, #eee 0px, #eee 6px, transparent 6px, transparent 14px); 
+        }
+        .film-roll-landscape::before { top: 4px; }
+        .film-roll-landscape::after { bottom: 4px; }
         
-        input[type="file"] { display: none; }
-        .file-label {
-            padding: 9px 22px; margin: 4px; border-radius: 30px; border: 3px solid #fff;
-            background: var(--accent-hover); color: white; font-weight: bold; cursor: pointer;
-            text-transform: uppercase; font-size: 10px; display: inline-block; transition: 0.3s;
+        .landscape-hero { 
+            width: 100%; 
+            aspect-ratio: 21/9; 
+            border: none; 
+            border-radius: 2px; 
+            object-fit: cover; 
+            display: block;
         }
 
-        .hist-entry { display: flex; flex-direction: column; padding: 8px 0; border-bottom: 1px solid rgba(0,0,0,0.05); }
-        .hist-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; }
-        .hist-time { font-size: 9px; opacity: 0.6; font-weight: bold; }
-        .hist-content { font-size: 10px; white-space: pre-wrap; background: rgba(255,255,255,0.3); padding: 5px; border-radius: 8px; }
+        .neon-sticker { position: absolute; color: var(--neon-pink); border: 2px solid var(--neon-pink); padding: 4px 10px; border-radius: 50px; font-size: 0.7rem; font-weight: 900; text-transform: uppercase; box-shadow: 0 0 10px var(--neon-pink), inset 0 0 5px var(--neon-pink); text-shadow: 0 0 5px var(--neon-pink); animation: flicker 1.5s infinite; z-index: 5; }
+        .sticker-pink { top: -15px; right: -10px; transform: rotate(15deg); animation: flicker 1.5s infinite, jitter 3s infinite ease-in-out; }
+        .sticker-blue { bottom: -10px; left: -10px; transform: rotate(-10deg); color: var(--neon-blue); border-color: var(--neon-blue); box-shadow: 0 0 10px var(--neon-blue), inset 0 0 5px var(--neon-blue); text-shadow: 0 0 5px var(--neon-blue); }
 
-        /* HIGHLIGHT STYLE */
-        .highlight { background-color: #fff176; color: #000; font-weight: bold; border-radius: 2px; padding: 0 2px; }
+        .memories-row-large img { width: 90px; height: 90px; border: 4px solid white; border-radius: 50%; object-fit: cover; cursor: zoom-in; }
+        .polaroid-grid-large { display: flex; justify-content: center; gap: 8px; margin: 15px 0; position: relative; }
+        .polaroid-large { background: white; padding: 6px 6px 22px; box-shadow: 0 6px 12px rgba(0,0,0,0.1); transition: 0.3s; cursor: zoom-in; }
+        .polaroid-large img { width: 85px; height: 110px; object-fit: cover; display: block; }
+        .polaroid-text { font-family: 'Caveat', cursive; font-size: 0.75rem; color: #444; margin-top: 4px; display: block; text-align: center; }
 
-        .theme-selector-container {
-            margin-top: 40px; padding: 15px 25px;
-            background: rgba(255,255,255,0.35);
-            display: inline-block; border-radius: 50px;
-            backdrop-filter: blur(8px); border: 1px solid #fff;
+        #zoom-portal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.9); display: none; justify-content: center; align-items: center; z-index: 100000; cursor: zoom-out; }
+        #zoom-portal img { max-width: 90%; max-height: 80vh; border: 10px solid white; border-radius: 10px; }
+
+        .hmm-column { display: flex; flex-direction: column; align-items: center; width: 45%; }
+        .hmm-img { width: 100%; aspect-ratio: 1/1; border: 5px solid white; border-radius: 15px; object-fit: cover; cursor: zoom-in; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+
+        .grad-frame-minimized { 
+            position: relative; 
+            padding: 10px; 
+            background: white; 
+            border: 4px solid var(--ghibli-green); 
+            border-radius: 15px; 
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08); 
+            margin: 10px auto;
+            width: fit-content;
+        }
+        .grad-image-small { width: 200px; aspect-ratio: 3/4; border-radius: 8px; display: block; cursor: zoom-in; object-fit: cover; }
+
+        .mochi-frame-minimized { 
+            border: 6px solid white; 
+            border-radius: 20px; 
+            box-shadow: 0 8px 25px rgba(255, 182, 193, 0.3); 
+            position: relative; 
+            overflow: hidden; 
+            width: 200px; 
+            margin: 10px auto; 
+        }
+        .mochi-frame-minimized img { width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block; cursor: zoom-in; }
+        .mochi-sticker-overlay { position: absolute; top: 8px; left: 8px; font-size: 1.8rem; animation: bounce-slow 2s infinite; z-index: 5; }
+        .mochi-msg-minimized { background: var(--mochi-peach); border: 1.5px dashed #ffb7c5; border-radius: 15px; padding: 10px 15px; color: #d63384; font-family: 'Caveat', cursive; font-size: 1.15rem; margin: 10px 0; box-shadow: 3px 3px 0 rgba(255,183,197,0.4); line-height: 1.2; position: relative; max-width: 90%; margin-left: auto; margin-right: auto; }
+
+        /* --- THEATER OVERLAY --- */
+        #theater-overlay {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: 100005; display: none; pointer-events: none;
+        }
+        .curtain {
+            position: absolute; top: 0; width: 50.5%; height: 100%;
+            background: repeating-linear-gradient(to right, var(--velvet-red), var(--velvet-red) 30px, var(--curtain-shadow) 35px, var(--velvet-red) 40px);
+            box-shadow: inset 0 0 100px rgba(0,0,0,0.5); z-index: 100006;
+        }
+        #curtain-l { left: 0; transform-origin: left; border-right: 2px solid rgba(0,0,0,0.3); }
+        #curtain-r { right: 0; transform-origin: right; border-left: 2px solid rgba(0,0,0,0.3); }
+
+        /* --- BIG PITCHER ROD STYLE --- */
+        .rod-container {
+            margin: 40px auto 15px;
+            position: relative;
+            width: 95%;
         }
 
-        .story-layout { display: flex; justify-content: center; gap: 15px; margin-top: 20px; flex-wrap: wrap; }
-        .left-photos { display: flex; flex-direction: column; gap: 15px; width: 45%; }
-        .right-photo { width: 45%; }
-        .cutie-img { width: 100%; border-radius: 25px; border: 8px solid #fff; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
+        /* The Wooden Rod */
+        .wooden-rod {
+            width: 110%;
+            height: 12px;
+            background: linear-gradient(to bottom, #795548, #5d4037, #3e2723);
+            border-radius: 10px;
+            position: absolute;
+            top: -20px;
+            left: -5%;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            z-index: 10;
+        }
+        .wooden-rod::before, .wooden-rod::after {
+            content: ''; position: absolute; top: -4px; width: 20px; height: 20px;
+            background: #3e2723; border-radius: 50%;
+        }
+        .wooden-rod::before { left: -5px; }
+        .wooden-rod::after { right: -5px; }
+
+        .gallery-hangings {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            gap: 15px;
+            padding-top: 10px;
+        }
+
+        .hanging-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            animation: pendulum 4s ease-in-out infinite;
+            transform-origin: center -20px;
+        }
+
+        /* Rope for each frame */
+        .hanging-item::before {
+            content: '';
+            width: 2px;
+            height: 25px;
+            background: #999;
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .side-by-side-frame {
+            background: white;
+            padding: 8px;
+            border: 5px solid #2c1810;
+            border-radius: 3px;
+            box-shadow: 5px 10px 20px rgba(0,0,0,0.2);
+            width: 140px;
+        }
+        .side-by-side-frame img {
+            width: 100%;
+            aspect-ratio: 3/4;
+            object-fit: cover;
+            display: block;
+            cursor: zoom-in;
+        }
     </style>
 </head>
 <body>
 
-<h1>AL AND AN ACC SORTER 🐾</h1>
+    <div id="cloud-l" class="cloud cloud-left">I'm proud of u! ☁️</div>
+    <div id="cloud-r" class="cloud cloud-right">Ur amazing! 💖</div>
+    <div id="flash"></div>
+    <div id="camera-icon">📸</div>
 
-<div class="nav">
-    <button onclick="switchTab('info')">🌱 Info Adder</button>
-    <button onclick="switchTab('manager')">🧺 Manager</button>
-    <button onclick="switchTab('extractor')">🔍 Extractor</button>
-    <button id="cutie-btn" onclick="switchTab('cutie-card')">🌸 Cutie!</button>
-</div>
+    <div id="zoom-portal" onclick="this.style.display='none'"><img id="zoomed-img" src=""></div>
+    <audio id="bgMusic" loop><source src="music.mp3" type="audio/mpeg"></audio>
 
-<div id="info" class="section card active">
-    <div style="font-size: 1.2rem; margin-bottom: 15px; font-weight: bold;">🌾 Info Adder</div>
-    <textarea id="info_input" placeholder="Paste user:pass here..."></textarea>
-    <div class="row">
-        <label class="file-label">📁 Load .txt <input type="file" accept=".txt" onchange="loadFile(this, 'info_input')"></label>
-        <input id="pot" placeholder="Potions" style="width: 110px;">
-        <input id="buck" placeholder="Bucks" style="width: 110px;">
-        <input id="cur" placeholder="Currency" style="width: 110px;">
+    <div id="theater-overlay">
+        <div id="curtain-l" class="curtain"></div>
+        <div id="curtain-r" class="curtain"></div>
     </div>
-    <div class="row">
-        <button onclick="addInfo()">Process Accounts</button>
-        <button onclick="toggleHistory('info-hist-box')">View History</button>
-    </div>
-    <span class="label-text">NEW OUTPUT:</span>
-    <div id="info_box" class="dropdown">No recent activity.</div>
-    <div class="row">
-        <button onclick="copyAndClear('info_box')">Copy Output</button>
-        <button onclick="downloadAndClear('info_box', 'processed.txt')">Save .txt</button>
-    </div>
-    <div id="info-hist-box" style="display:none;">
-        <span class="label-text">📜 SEARCH HISTORY:</span>
-        <input class="hist-search" placeholder="🔍 Search history..." style="width: 95%; margin-bottom: 10px;" onkeyup="refreshHistoryViews()">
-        <div class="info-hist dropdown"></div>
-        <button class="btn-grey" onclick="clearHistory()" style="font-size: 8px;">Clear All History</button>
-    </div>
-</div>
 
-<div id="manager" class="section card">
-    <div style="font-size: 1.2rem; margin-bottom: 15px; font-weight: bold;">🧺 Account Manager</div>
-    <textarea id="mgr_input" placeholder="Paste full processed lines here..."></textarea>
-    <div class="row">
-        <label class="file-label">📁 Load .txt <input type="file" accept=".txt" onchange="loadFile(this, 'mgr_input')"></label>
-        <button onclick="saveToDB()">Save to DB</button>
-    </div>
-    <hr style="border:0; border-top:1px solid rgba(0,0,0,0.05); margin:20px 0;">
-    <div class="row">
-        <input id="mgr_search" placeholder="🔍 Search Database..." style="width: 150px;" onkeyup="refreshDBView()">
-        <div style="font-size: 10px; font-weight: 800;">QTY:</div>
-        <input type="number" id="withdraw_qty" value="1" style="width:50px">
-        <div style="font-size: 10px; font-weight: 800;">FILTER:</div>
-        <select id="range_select">
-            <option value="any">Any</option>
-            <option value="1M">1M</option>
-            <option value="1.5M">1.5M</option>
-            <option value="2M">2M</option>
-        </select>
-        <button class="btn-grey" onclick="withdrawAccs()">Get & Delete</button>
-    </div>
-    <span class="label-text">DATABASE (<span id="db_count">0</span>):</span>
-    <div id="db_box" class="dropdown">Database empty.</div>
-    <div class="row">
-        <button onclick="copyAndClear('db_box', true)">Copy DB</button>
-        <button onclick="downloadAndClear('db_box', 'database.txt', true)">Save .txt</button>
-        <button class="btn-grey" onclick="clearFullDB()" style="font-size: 9px;">Wipe DB</button>
-    </div>
-    <span class="label-text">LATEST WITHDRAWAL:</span>
-    <div id="get_box" class="dropdown">None</div>
-    <div class="row">
-        <button onclick="copyAndClear('get_box')">Copy Withdrawal</button>
-        <button onclick="toggleHistory('mgr-hist-box')">View History</button>
-    </div>
-    <div id="mgr-hist-box" style="display:none;">
-        <span class="label-text">📜 SEARCH HISTORY:</span>
-        <input class="hist-search" placeholder="🔍 Search history..." style="width: 95%; margin-bottom: 10px;" onkeyup="refreshHistoryViews()">
-        <div class="mgr-hist dropdown"></div>
-        <button class="btn-grey" onclick="clearHistory()" style="font-size: 8px;">Clear All History</button>
-    </div>
-</div>
-
-<div id="extractor" class="section card">
-    <div style="font-size: 1.2rem; margin-bottom: 15px; font-weight: bold;">🔍 Extractor</div>
-    <textarea id="ext_input" placeholder="Paste bulk logs here..."></textarea>
-    <div class="row">
-        <label class="file-label">📁 Load .txt <input type="file" accept=".txt" onchange="loadFile(this, 'ext_input')"></label>
-        <button onclick="extract()">Extract Unique</button>
-        <button onclick="toggleHistory('ext-hist-box')">View History</button>
-    </div>
-    <span class="label-text">NEW OUTPUT:</span>
-    <div id="ext_box" class="dropdown">No recent activity.</div>
-    <div class="row">
-        <button onclick="copyAndClear('ext_box')">Copy Output</button>
-        <button onclick="downloadAndClear('ext_box', 'extracted.txt')">Save .txt</button>
-    </div>
-    <div id="ext-hist-box" style="display:none;">
-        <span class="label-text">📜 SEARCH HISTORY:</span>
-        <input class="hist-search" placeholder="🔍 Search history..." style="width: 95%; margin-bottom: 10px;" onkeyup="refreshHistoryViews()">
-        <div class="ext-hist dropdown"></div>
-        <button class="btn-grey" onclick="clearHistory()" style="font-size: 8px;">Clear All History</button>
-    </div>
-</div>
-
-<div id="cutie-card" class="section card">
-    <div style="font-size: 1.4rem; color:#e8a5a5; font-weight: 900;">🌸 MY CUTIE !! 🌸</div>
-    <div class="story-layout">
-        <div class="left-photos">
-            <img src="pic3.jpg" class="cutie-img" alt="pic3">
-            <img src="pic1.jpg" class="cutie-img" alt="pic1">
-        </div>
-        <div class="right-photo">
-            <img src="pic2.jpg" class="cutie-img" alt="pic2">
+    <!-- PAGE 1: START -->
+    <div id="page1" class="page active">
+        <div class="glass-card">
+            <h1 style="color: var(--deep-rose); font-size: 2rem; margin: 0;">HI BABY! ❤️</h1>
+            <p style="font-size: 1rem; color: #555;">Welcome to our garden...</p>
+            <div class="btn-row"><button class="nav-btn" onclick="startExp()">START ✨</button></div>
         </div>
     </div>
-    <div style="font-size: 1.3rem; color:#e8a5a5; font-weight: 900; margin-top: 25px;">OH MY GORGEOUS WOMAN!!! 🤩💕👑✨</div>
-</div>
-
-<div class="theme-selector-container">
-    <span style="font-size: 10px; font-weight: bold; margin-right: 10px;">SELECT THEME:</span>
-    <select id="theme-selector" onchange="changeTheme(this.value)">
-        <option value="mountain">🏔️ Ghibli Mountains</option>
-        <option value="cottage">🏡 Summer Cottage</option>
-        <option value="meadow">🌿 Misty Jungle Meadow</option>
-    </select>
-</div>
-
-<script>
-const themes = {
-    mountain: {
-        '--bg-overlay': 'linear-gradient(rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.15))',
-        '--bg-img': "url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2070&auto=format&fit=crop')",
-        '--text-main': '#5d6d5e', '--accent': '#a5b8a5', '--accent-hover': '#8ca68c',
-        '--card-bg': 'rgba(255, 255, 255, 0.78)', '--input-bg': 'rgba(255, 255, 255, 0.5)',
-        '--shadow': 'rgba(0, 0, 0, 0.08)', '--border': 'rgba(255, 255, 255, 0.9)'
-    },
-    cottage: {
-        '--bg-overlay': 'linear-gradient(rgba(255, 252, 242, 0.4), rgba(215, 226, 215, 0.4))',
-        '--bg-img': "url('https://images.unsplash.com/photo-1444384851176-6e23071c6127?q=80&w=2000&auto=format&fit=crop')",
-        '--text-main': '#6b5e4c', '--accent': '#d4a373', '--accent-hover': '#bc8a5f',
-        '--card-bg': 'rgba(252, 250, 242, 0.92)', '--input-bg': 'rgba(255, 255, 255, 0.6)',
-        '--shadow': 'rgba(150, 130, 100, 0.12)', '--border': '#e6dec9'
-    },
-    meadow: {
-        '--bg-overlay': 'linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05))',
-        '--bg-img': "url('https://images.unsplash.com/photo-1542332213-31f87348057f?q=80&w=2070&auto=format&fit=crop')",
-        '--text-main': '#2d3d2d', '--accent': '#6b8c6b', '--accent-hover': '#4a5d4a',
-        '--card-bg': 'rgba(255, 255, 255, 0.82)', '--input-bg': 'rgba(240, 245, 240, 0.6)',
-        '--shadow': 'rgba(20, 40, 20, 0.15)', '--border': '#d4d9d4'
-    }
-};
-
-function changeTheme(tk) {
-    const t = themes[tk]; const r = document.documentElement;
-    for (const [p, v] of Object.entries(t)) { r.style.setProperty(p, v); }
-    localStorage.setItem('ghibli_theme_pref', tk);
-}
-
-function loadFile(input, targetId) {
-    const file = input.files[0];
-    if (file) {
-        const reader = new FileReader();
-        reader.onload = (e) => { document.getElementById(targetId).value = e.target.result; };
-        reader.readAsText(file);
-    }
-}
-
-// History logic with Search and Highlighting
-function updateHistory(msg, data) {
-    let hist = JSON.parse(localStorage.getItem("sorter_history")) || [];
-    let time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-    hist.unshift({text: msg, content: data, time: time});
-    if(hist.length > 50) hist.pop();
-    localStorage.setItem("sorter_history", JSON.stringify(hist));
-    refreshHistoryViews();
-}
-
-function clearHistory() {
-    if(confirm("Clear history?")) { localStorage.removeItem("sorter_history"); refreshHistoryViews(); }
-}
-
-function highlightText(text, query) {
-    if (!query) return text;
-    const regex = new RegExp(`(${query})`, 'gi');
-    return text.replace(regex, '<span class="highlight">$1</span>');
-}
-
-function refreshHistoryViews() {
-    let hist = JSON.parse(localStorage.getItem("sorter_history")) || [];
-    let activeCard = document.querySelector('.card.active');
-    let query = activeCard ? activeCard.querySelector('.hist-search')?.value.toLowerCase() || "" : "";
-
-    let filtered = hist.filter(entry => 
-        entry.text.toLowerCase().includes(query) || 
-        entry.content.toLowerCase().includes(query)
-    );
-
-    let html = filtered.map(entry => `
-        <div class="hist-entry">
-            <div class="hist-header">
-                <span style="font-weight:bold;">${highlightText(entry.text, query)}</span>
-                <span class="hist-time">${entry.time}</span>
+    
+    <!-- PAGE 2: NOTE -->
+    <div id="page2" class="page">
+        <div class="glass-card">
+            <h1 style="font-size: 1.8rem; margin: 0 0 10px;">A Little Note ✍️</h1>
+            <div class="msg-box">I made this for you because you are simply the best person in my world!</div>
+            <div class="btn-row">
+                <button class="nav-btn back-btn" onclick="prevPage()">Back</button>
+                <button class="nav-btn" onclick="nextPage()">Next ✨</button>
             </div>
-            <div class="hist-content">${highlightText(entry.content, query)}</div>
         </div>
-    `).join("");
+    </div>
     
-    document.querySelectorAll(".info-hist, .mgr-hist, .ext-hist").forEach(el => {
-        el.innerHTML = filtered.length ? html : (hist.length ? "No matches found." : "No history.");
-    });
-}
+    <!-- PAGE 3: MEMORIES -->
+    <div id="page3" class="page">
+        <div class="glass-card">
+            <h1 style="font-size: 1.8rem; margin: 0;">MEMORIES 🧸</h1>
+            <div class="memories-row-large" style="display:flex; justify-content:center; gap:10px; margin: 15px 0;">
+                <img src="pic1.jpg" onclick="openZoom(this.src)">
+                <img src="pic2.jpg" onclick="openZoom(this.src)">
+                <img src="pic3.jpg" onclick="openZoom(this.src)">
+            </div>
+            <div class="zoom-hint">Click any image to zoom</div>
+            <div class="msg-box">Every memory is a treasure.</div>
+            <div class="btn-row">
+                <button class="nav-btn back-btn" onclick="prevPage()">Back</button>
+                <button class="nav-btn" onclick="nextPage()">Next ✨</button>
+            </div>
+        </div>
+    </div>
 
-function toggleHistory(id) {
-    let x = document.getElementById(id);
-    x.style.display = (x.style.display === "none") ? "block" : "none";
-    if(x.style.display === "block") refreshHistoryViews();
-}
+    <!-- PAGE 4: SEPTEMBER -->
+    <div id="page4" class="page ultra-compact">
+        <div class="glass-card" style="padding: 20px;">
+            <h1 style="margin:0; font-size: 1.5rem;">26th SEPTEMBER 🌸</h1>
+            <div class="roll-compact-grid">
+                <img src="sep1.jpg" class="mini-box" onclick="openZoom(this.src)">
+                <img src="sep2.jpg" class="mini-box" onclick="openZoom(this.src)">
+                <img src="sep3.jpg" class="mini-box" onclick="openZoom(this.src)">
+                <img src="sep4.jpg" class="mini-box" onclick="openZoom(this.src)">
+            </div>
+            <div class="zoom-hint">Click any image to zoom</div>
+            <div class="msg-box" style="font-size: 0.8rem; padding: 6px 10px;">A core memory.</div>
+            <div class="btn-row">
+                <button class="nav-btn back-btn" onclick="prevPage()">Back</button>
+                <button class="nav-btn" onclick="theaterTransition()">Next ✨</button>
+            </div>
+        </div>
+    </div>
 
-// Tab Switching + Full Reset
-function switchTab(id) {
-    document.getElementById("info_input").value = "";
-    document.getElementById("mgr_input").value = "";
-    document.getElementById("ext_input").value = "";
-    document.getElementById("pot").value = "";
-    document.getElementById("buck").value = "";
-    document.getElementById("cur").value = "";
-    document.getElementById("mgr_search").value = "";
-    document.getElementById("withdraw_qty").value = "1"; 
-    document.getElementById("range_select").value = "any";
-    document.querySelectorAll('.hist-search').forEach(s => s.value = "");
-    
-    clearAllOutputs();
-    document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    
-    if(id === 'manager') refreshDBView();
-    refreshHistoryViews();
-}
+    <!-- PAGE 5: CHILDRENS DAY -->
+    <div id="page5" class="page">
+        <div class="glass-card">
+            <h1 style="font-size: 1.8rem; margin:0;">CHILDRENS DAY 🧸</h1>
+            <div class="film-roll-landscape" onclick="openZoom('pic3.jpg')">
+                <img src="pic3.jpg" class="landscape-hero">
+            </div>
+            <div class="zoom-hint">Click image to zoom</div>
+            <div class="msg-box">Keep that inner child alive! ❤️</div>
+            <div class="btn-row">
+                <button class="nav-btn back-btn" onclick="prevPage()">Back</button>
+                <button class="nav-btn" onclick="nextPage()">Next ✨</button>
+            </div>
+        </div>
+    </div>
 
-function clearAllOutputs() {
-    document.getElementById("info_box").innerText = "No recent activity.";
-    document.getElementById("ext_box").innerText = "No recent activity.";
-    document.getElementById("get_box").innerText = "None";
-}
+    <!-- PAGE 6: GRADUATION -->
+    <div id="page6" class="page">
+        <div class="glass-card">
+            <h1 style="font-size: 1.8rem; margin:0; color: #2d6a4f;">GRADUATION DAY 🎓</h1>
+            <div class="grad-frame-minimized" id="grad-target">
+                <img src="pic2.jpg" class="grad-image-small" onclick="openZoom(this.src)">
+            </div>
+            <div class="zoom-hint">Click photo to zoom</div>
+            <div class="msg-box" style="border-color: #2d6a4f;">My clever, hard-working girl! You did it and I'm the proudest person alive!</div>
+            <div class="btn-row">
+                <button class="nav-btn back-btn" onclick="prevPage()">Back</button>
+                <button class="nav-btn" onclick="cameraTransition()">Next ✨</button>
+            </div>
+        </div>
+    </div>
 
-function parseUserPass(line) {
-    let m = line.match(/user:\s*([^\s|]+)\s*pass:\s*([^\s|]+)/i);
-    if (m) return { u: m[1], p: m[2] };
-    let fallback = line.match(/([a-zA-Z0-9._\-]+):([a-zA-Z0-9._\-!@#$%^&*]+)/);
-    return fallback ? { u: fallback[1], p: fallback[2] } : null;
-}
+    <!-- PAGE 7: PHOTOBOOTH -->
+    <div id="page7" class="page">
+        <div class="glass-card" style="position: relative;">
+            <h1 style="font-size: 1.8rem; margin:0;">PHOTOBOOTH 📸</h1>
+            <div class="polaroid-grid-large">
+                <div class="neon-sticker sticker-pink">LOVE YOU</div>
+                <div class="neon-sticker sticker-blue">SMILE</div>
+                <div class="polaroid-large" style="transform: rotate(-3deg)" onclick="openZoom('photo1.jpg')">
+                    <img src="photo1.jpg"><span class="polaroid-text">Best smile! ✨</span>
+                </div>
+                <div class="polaroid-large" style="transform: rotate(2deg)" onclick="openZoom('photo2.jpg')">
+                    <img src="photo2.jpg"><span class="polaroid-text">My favorite... ❤️</span>
+                </div>
+                <div class="polaroid-large" style="transform: rotate(-1deg)" onclick="openZoom('photo3.jpg')">
+                    <img src="photo3.jpg"><span class="polaroid-text">Happy hearts 🎀</span>
+                </div>
+            </div>
+            <div class="msg-box">Capture the moment forever.</div>
+            <div class="btn-row">
+                <button class="nav-btn back-btn" onclick="prevPage()">Back</button>
+                <button class="nav-btn" onclick="nextPage()">Next ✨</button>
+            </div>
+        </div>
+    </div>
 
-function extract() {
-    let inputEl = document.getElementById("ext_input");
-    let lines = inputEl.value.split("\n");
-    let out = [];
-    lines.forEach(l => {
-        let acc = parseUserPass(l);
-        if(acc) out.push(`${acc.u}:${acc.p}`);
-    });
-    let result = out.join("\n");
-    if(out.length) {
-        document.getElementById("ext_box").innerText = result;
-        updateHistory(`Extracted ${out.length} Accs`, result);
-        inputEl.value = ""; 
-    }
-}
+    <!-- PAGE 8: BIG PITCHER -->
+    <div id="page8" class="page">
+        <div class="glass-card">
+            <h1 style="font-size: 1.8rem; margin:0;">BIG PITCHER 🖼️</h1>
+            
+            <div class="rod-container">
+                <div class="wooden-rod"></div>
+                <div class="gallery-hangings">
+                    <div class="hanging-item">
+                        <div class="side-by-side-frame">
+                            <img src="big1.jpg" onclick="openZoom(this.src)">
+                        </div>
+                    </div>
+                    <div class="hanging-item" style="animation-delay: -1s;">
+                        <div class="side-by-side-frame">
+                            <img src="big2.jpg" onclick="openZoom(this.src)">
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-function addInfo() {
-    let inputEl = document.getElementById("info_input");
-    let lines = inputEl.value.split("\n");
-    let p = document.getElementById("pot").value || "0";
-    let b = document.getElementById("buck").value || "0";
-    let c = document.getElementById("cur").value || "0"; 
-    let out = [];
-    lines.forEach(l => {
-        let acc = parseUserPass(l);
-        if(acc) out.push(`user: ${acc.u} pass: ${acc.p} | Pot: ${p} | Bucks: ${b} | Currency: ${c}`);
-    });
-    let result = out.join("\n");
-    if(out.length) {
-        document.getElementById("info_box").innerText = result;
-        updateHistory(`Processed ${out.length} Accs`, result);
-        inputEl.value = ""; 
-    }
-}
+            <div class="zoom-hint">Click any photo to zoom</div>
+            <div class="msg-box">You're my favorite view. ❤️</div>
+            <div class="btn-row">
+                <button class="nav-btn back-btn" onclick="prevPage()">Back</button>
+                <button class="nav-btn" onclick="nextPage()">Next ✨</button>
+            </div>
+        </div>
+    </div>
 
-function saveToDB() {
-    let db = JSON.parse(localStorage.getItem("manager_db")) || [];
-    let inputEl = document.getElementById("mgr_input");
-    let lines = inputEl.value.split("\n");
-    let addedCount = 0;
-    lines.forEach(l => { 
-        let cleanLine = l.trim();
-        if(cleanLine !== "" && !db.includes(cleanLine)) { 
-            db.push(cleanLine); 
-            addedCount++; 
-        } 
-    });
-    localStorage.setItem("manager_db", JSON.stringify(db));
-    refreshDBView();
-    if(addedCount > 0) {
-        updateHistory(`Saved ${addedCount} to DB`, lines.join("\n"));
-        inputEl.value = ""; 
-    }
-}
+    <!-- PAGE 9: HMMMM -->
+    <div id="page9" class="page">
+        <div class="glass-card">
+            <h1 style="font-size: 1.6rem; margin-bottom: 20px;">HMMMMMMMMMMMMMMM? 🐾</h1>
+            <div style="display:flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px;">
+                <div class="hmm-column">
+                    <img src="hmm1.jpg" class="hmm-img" onclick="openZoom(this.src)">
+                    <div class="zoom-hint">Click to zoom</div>
+                    <div class="msg-box" style="margin-top: 10px; width: 100%; border-color: var(--ghibli-green);">My world and my best friend.</div>
+                </div>
+                <div class="hmm-column">
+                    <img src="hmm2.jpg" class="hmm-img" onclick="openZoom(this.src)">
+                    <div class="zoom-hint">Click to zoom</div>
+                    <div class="msg-box" style="margin-top: 10px; width: 100%; border-color: var(--soft-pink); box-shadow: 2px 2px 0 var(--soft-pink);">I love you forever! 🎀</div>
+                </div>
+            </div>
+            <div class="btn-row">
+                <button class="nav-btn back-btn" onclick="prevPage()">Back</button>
+                <button class="nav-btn" onclick="nextPage()">Next ✨</button>
+            </div>
+        </div>
+    </div>
 
-function clearFullDB() {
-    if(confirm("Wipe DB?")) { localStorage.removeItem("manager_db"); refreshDBView(); }
-}
+    <!-- PAGE 10: PRETTY WOMAN -->
+    <div id="page10" class="page">
+        <div class="glass-card" style="background: #fffafa; border-color: #ffc2d1;">
+            <h1 style="font-size: 1.4rem; color: #ff5c8a;">MY PRETTYY WOMANNN!!! 🌸</h1>
+            <div class="mochi-frame-minimized"><span class="mochi-sticker-overlay">🍡</span><img src="pretty_main.jpg" onclick="openZoom(this.src)"></div>
+            <div class="mochi-msg-minimized">You are literally the prettiest woman to ever exist! You're my sweet little mochi and I'm so lucky to have you. I love you more than words can say! 🎀✨</div>
+            <div class="btn-row">
+                <button class="nav-btn back-btn" onclick="prevPage()">Back</button>
+                <button class="nav-btn" onclick="location.reload()">RESTART 🧸</button>
+            </div>
+        </div>
+    </div>
 
-function withdrawAccs() {
-    let db = JSON.parse(localStorage.getItem("manager_db")) || [];
-    let qty = parseInt(document.getElementById("withdraw_qty").value) || 1;
-    let target = document.getElementById("range_select").value;
-    let withdrawn = []; let remaining = [];
-    db.forEach(item => {
-        let itemCur = item.includes("Currency:") ? item.split("Currency:")[1].trim() : "0";
-        let match = (target === "any") || (itemCur.toLowerCase().startsWith(target.toLowerCase()));
-        if(match && withdrawn.length < qty) { withdrawn.push(item); } 
-        else { remaining.push(item); }
-    });
-    localStorage.setItem("manager_db", JSON.stringify(remaining));
-    refreshDBView();
-    if(withdrawn.length) {
-        document.getElementById("get_box").innerText = withdrawn.join("\n");
-        updateHistory(`Withdrew ${withdrawn.length} Accs`, withdrawn.join("\n"));
-    }
-}
+    <script>
+        let current = 1;
+        const totalPages = 10;
+        const affirmations = [["I'm proud of u!", "Ur amazing!"], ["I love u!", "Always mine!"], ["Stay sweet!", "Favorite!"]];
 
-function refreshDBView() {
-    let db = JSON.parse(localStorage.getItem("manager_db")) || [];
-    let search = document.getElementById("mgr_search").value.toLowerCase();
-    let filtered = db.filter(item => item.toLowerCase().includes(search));
-    document.getElementById("db_count").innerText = db.length;
-    document.getElementById("db_box").innerText = filtered.length ? filtered.join("\n") : "Database empty.";
-}
+        function showPage(index) {
+            document.querySelectorAll('.page').forEach(p => { 
+                p.style.display = 'none'; 
+                p.classList.remove('active'); 
+            });
+            const target = document.getElementById(`page${index}`);
+            if (target) { 
+                target.style.display = 'flex'; 
+                target.classList.add('active'); 
+                
+                if(index === 6) {
+                    floodGraduation();
+                } else if(index === 9) {
+                    floodThinking();
+                }
+            }
+            updateClouds();
+        }
 
-function copyAndClear(id, isDb = false) { 
-    let text = document.getElementById(id).innerText;
-    if (text.includes("No recent") || text.includes("empty") || text === "None") return;
-    navigator.clipboard.writeText(text).then(() => {
-        if (!isDb) document.getElementById(id).innerText = (id === "get_box") ? "None" : "No recent activity.";
-    });
-}
+        function floodThinking() {
+            for(let i = 0; i < 40; i++) {
+                setTimeout(() => {
+                    if (current !== 9) return;
+                    const e = document.createElement('div');
+                    e.className = 'thinking-emoji';
+                    e.innerText = '🤔';
+                    e.style.left = Math.random() * 100 + 'vw';
+                    e.style.top = Math.random() * 100 + 'vh';
+                    e.style.setProperty('--tx', (Math.random() - 0.5) * 400 + 'px');
+                    e.style.setProperty('--ty', (Math.random() - 0.5) * 400 + 'px');
+                    document.body.appendChild(e);
+                    setTimeout(() => e.remove(), 1500);
+                }, i * 30);
+            }
+        }
 
-function downloadAndClear(id, filename, isDb = false) {
-    let t = document.getElementById(id).innerText;
-    if (t.includes("No recent") || t.includes("empty") || t === "None") return;
-    let blob = new Blob([t], {type: "text/plain"});
-    let url = URL.createObjectURL(blob);
-    let a = document.createElement("a");
-    a.href = url; a.download = filename; a.click();
-    if (!isDb) document.getElementById(id).innerText = (id === "get_box") ? "None" : "No recent activity.";
-}
+        function floodGraduation() {
+            const emojis = ['🎓', '📜', '🎓✨', '📜✨'];
+            for(let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    if (current !== 6) return; 
+                    
+                    const e = document.createElement('div');
+                    e.className = 'grad-pop-emoji';
+                    e.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+                    
+                    const angle = Math.random() * Math.PI * 2;
+                    const distance = 100 + Math.random() * 200;
+                    const tx = Math.cos(angle) * distance;
+                    const ty = Math.sin(angle) * distance;
+                    const rot = (Math.random() - 0.5) * 90;
+                    
+                    e.style.setProperty('--tx', `${tx}px`);
+                    e.style.setProperty('--ty', `${ty}px`);
+                    e.style.setProperty('--rot', `${rot}deg`);
+                    
+                    document.body.appendChild(e);
+                    setTimeout(() => e.remove(), 1500);
+                }, i * 60);
+            }
+        }
 
-window.onload = () => { 
-    refreshDBView(); 
-    refreshHistoryViews();
-    const saved = localStorage.getItem('ghibli_theme_pref') || 'mountain';
-    document.getElementById('theme-selector').value = saved;
-    changeTheme(saved);
-};
-</script>
+        function updateClouds() {
+            const set = affirmations[current % affirmations.length];
+            document.getElementById('cloud-l').innerText = set[0];
+            document.getElementById('cloud-r').innerText = set[1];
+        }
+
+        function startExp() { document.getElementById('bgMusic').play().catch(()=>{}); nextPage(); }
+        
+        function nextPage() { 
+            if(current < totalPages) { 
+                current++; 
+                clearGradEmojis(); 
+                showPage(current); 
+            } 
+        }
+        
+        function prevPage() { 
+            if(current > 1) { 
+                current--; 
+                clearGradEmojis(); 
+                showPage(current); 
+            } 
+        }
+
+        function clearGradEmojis() {
+            document.querySelectorAll('.grad-pop-emoji').forEach(e => e.remove());
+        }
+
+        function theaterTransition() {
+            const overlay = document.getElementById('theater-overlay');
+            const l = document.getElementById('curtain-l');
+            const r = document.getElementById('curtain-r');
+            overlay.style.display = 'block';
+            l.style.animation = 'curtainClose 0.7s forwards cubic-bezier(0.5, 0, 0.5, 1)';
+            r.style.animation = 'curtainClose 0.7s forwards cubic-bezier(0.5, 0, 0.5, 1)';
+            setTimeout(() => {
+                nextPage();
+                setTimeout(() => {
+                    l.style.animation = 'curtainOpen 0.9s forwards cubic-bezier(0.5, 0, 0.5, 1)';
+                    r.style.animation = 'curtainOpen 0.9s forwards cubic-bezier(0.5, 0, 0.5, 1)';
+                    setTimeout(() => { overlay.style.display = 'none'; }, 900);
+                }, 200);
+            }, 750);
+        }
+
+        function cameraTransition() {
+            const f = document.getElementById('flash');
+            const cam = document.getElementById('camera-icon');
+            f.classList.remove('shutter-active');
+            cam.classList.remove('camera-pop-active');
+            void f.offsetWidth; 
+            f.classList.add('shutter-active');
+            cam.classList.add('camera-pop-active');
+            
+            clearGradEmojis();
+
+            setTimeout(() => { nextPage(); }, 500);
+            setTimeout(() => {
+                f.classList.remove('shutter-active');
+                cam.classList.remove('camera-pop-active');
+            }, 1200);
+        }
+
+        function openZoom(src) { 
+            document.getElementById('zoomed-img').src = src; 
+            document.getElementById('zoom-portal').style.display = 'flex'; 
+        }
+
+        // Updated trail logic for higher frequency and better translucency
+        let lastMove = 0;
+        document.addEventListener('mousemove', (e) => {
+            const now = Date.now();
+            if (now - lastMove < 30) return; // Much faster spawn rate (approx 30fps)
+            lastMove = now;
+
+            const flowers = ['🌸', '💮', '🌺', '🌼', '✨'];
+            const t = document.createElement('div'); 
+            t.className = 'trail'; 
+            t.innerHTML = flowers[Math.floor(Math.random() * flowers.length)];
+            t.style.left = e.clientX + 'px'; 
+            t.style.top = e.clientY + 'px';
+            // Slight random offset for a more natural trail
+            t.style.marginLeft = (Math.random() * 20 - 10) + 'px';
+            t.style.marginTop = (Math.random() * 20 - 10) + 'px';
+            
+            document.body.appendChild(t); 
+            setTimeout(() => t.remove(), 1000);
+        });
+
+        setInterval(() => {
+            const p = document.createElement('div'); p.className = 'petal';
+            p.style.left = Math.random() * 100 + 'vw';
+            p.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            document.body.appendChild(p); setTimeout(() => p.remove(), 6000);
+        }, 500);
+
+        window.onload = () => showPage(1);
+    </script>
 </body>
-</html>11:53 27-03-2026
+</html>
